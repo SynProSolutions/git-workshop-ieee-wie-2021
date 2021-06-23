@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Git Grundlagen-Workshop / SynPro Solutions @ IEEE Women in Engineering Austria / 14.07.2021</title>
+    <meta charset="utf-8">
+    <style>
+      @font-face {
+        font-family: 'Yanone Kaffeesatz';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(fonts/yanonekaffeesatz-regular.ttf) format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(fonts/droid-serif-italic.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Droid Serif Regular'), local('DroidSerif-Regular'), url(fonts/droid-serif-regular.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(fonts/droid-serif-bold.ttf) format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(fonts/ubuntu-mono-italic.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(fonts/ubuntu-mono.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(fonts/ubuntu-mono-bold.ttf) format('truetype');
+      }
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .remark-slide-content > ul li, .remark-slide-content > ol li { margin: 1.4em 1em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+      .remark-slide-content > .nospace-rows li { margin: auto 1.1rem; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+<!-- begin of slide content -->
+
+# Git Grundlagen-Workshop
+
+.center[<a href="https://xkcd.com/1597/">![xckd git](includes/xkcd-git.png)</a>]
+
+---
+
+# Agenda für Workshop
+
+<img alt="IEEE Student Branch Graz" src="includes/ieee_wie.jpg" style="float:right" />
+IEEE Women in Engineering / 14.07.2021
+
+1. Vorstellungsrunde
+2. Installation
+3. Arbeiten mit Git
+4. Zeit für Fragen
+
+---
+
+# Wer sind wir?
+
+.center[<a href="https://synpro.solutions/?git-workshop-ieee-wie-2021">![SynPro Solutions](includes/synpro.png)</a>]
+
+<table>
+<tr><td><strong>Darshaka Pathirana:</strong></td><td>Git-User seit 2009</td></tr>
+<tr><td><strong>Michael Prokop:</strong</td><td>Git-User seit 2006</td></tr>
+</table>
+
+Wir bieten Systemadministration und -integration für KMUs (Schwerpunkt Linux) an.
+Heterogene Umgebungen gehören aber zu unserem Alltag.
+
+Git verwenden wir täglich und ist für uns unverzichtbar.
+
+---
+
+# Vorstellungsrunde
+
+* Wer hat schon einmal mit Versionskontrolle zu tun gehabt?
+* Was weißt du zu Git bzw. was stellst du dir darunter vor?
+* Warum willst du Git verwenden bzw. was erwartest du dir vom Workshop?
+
+---
+
+# Installation
+
+* Mac OS
+* Windows
+* Linux
+
+---
+
+## Mac OS
+
+Vielleicht ist Git bereits installiert?
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git version</span>
+</code></pre>
+
+bzw.
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% mdfind -name git | grep bin</span>
+</code></pre>
+
+Schon installiert? Version *sollte* halbwegs aktuell sein.
+
+Anmerkung: wir verwenden aktuell Git v2.30.2.
+
+Optionen zur Installation:
+
+1. X-Code
+2. Natives Paket
+3. Brew
+
+---
+
+## Mac OS #1: Git via X-Code
+
+Wer X-Code hat, bekommt git mitgeliefert (`/usr/bin/git`):
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git version</span>
+git version 2.8.4 (Apple Git-73)
+</code></pre>
+
+bzw.:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% /Applications/Xcode.app/Contents/Developer/usr/bin/git --version</span>
+git version 2.8.4 (Apple Git-73)
+
+<span class="hljs-string">% /Library/Developer/CommandLineTools/usr/bin/git --version</span>
+git version 2.10.1 (Apple Git-78)
+</code></pre>
+
+- Vorteil: vielleicht eh schon da ☻
+- Nachteil: häufig veraltete Version, benötigt X-Code
+
+---
+
+## Mac OS #2: Git for Mac Installer
+
+`dmg` von https://git-scm.com/download/mac runterladen.
+
+Hinweis: unter 'Security &amp; Privacy' → 'Allow apps downloaded from' Installation erlauben
+
+- **Vorteil:** benötigt sonst nichts Spezielles
+- **Nachteil:** keine Paketmanager-Integration (z.B. für Updates)
+
+---
+
+## Mac OS #3: Git via Brew
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% brew install git</span>
+</code></pre>
+
+Brew? Siehe https://docs.brew.sh/Installation.html:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% /usr/bin/ruby -e \</span>
+<span class="hljs-string"> "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span>
+</code></pre>
+
+- **Vorteil:** Paketmanager-Integration
+- **Nachteil:** benötigt X-Code bzw. X-Code command line tools (`xcode-select --install`)
+
+---
+
+## Mac OS:
+
+Falls Git installiert, `git` Befehl aber noch nicht verfügbar ist:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% export PATH="$PATH:/usr/local/bin/:/usr/local/git/bin"</span>
+</code></pre>
+
+In `~/.zshrc` bzw `~/.bash_profile` hinzufügen, um es permanent zu machen.
+
+---
+
+## Windows #1: Git for Windows Installer
+
+Installer-`exe` von https://git-scm.com/download/win runterladen.
+
+Standard-Komponenten und Einstellungen behalten und installieren.
+
+*Der Standard-Editor ist `vim`, man kann auch noch zwischen `Nano` und `Notepad++` wählen.*
+
+- **Vorteil:** man kann die Installation anpassen
+- **Nachteile:** keine Paketmanager-Integration (via chocolatey), viele Fragen (die man vielleicht nicht beantworten möchte / kann)
+
+---
+
+## Windows #2: Git via Chocolatey
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">&gt; choco install -y git.install</span>
+</code></pre>
+
+Chocolatey?
+
+> Chocolatey is a package manager for Windows (like apt-get or yum but for Windows).
+
+Siehe: https://chocolatey.org/install
+
+- **Vorteil:** Paketmanager-Integration. Einfaches Upgrade durch `choco upgrade -y git.install`
+- **Nachteile:** Anpassen der Installation nicht möglich (aber alles ist nachträglich konfigurierbar)
+
+---
+
+## Linux
+
+Je nach Distribution:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% sudo apt install git</span>           <span class="hljs-comment"># Debian/Ubuntu/Mint/…</span>
+<span class="hljs-string">% sudo pacman -S git</span>             <span class="hljs-comment"># Archlinux</span>
+<span class="hljs-string">% sudo dnf install git</span>           <span class="hljs-comment"># neuere RHEL/CentOS/Fedora</span>
+<span class="hljs-string">% sudo yum install git</span>           <span class="hljs-comment"># ältere RHEL/CentOS/Fedora</span>
+<span class="hljs-string">% sudo emerge --ask dev-vcs/git</span>  <span class="hljs-comment"># Gentoo</span>
+…
+</code></pre>
+
+---
+
+# Arbeiten mit Git - was haben wir vor?
+
+## Basis-Konfiguration
+
+## Lokales Git-Repository
+
+* Test-Projekt + Repository anlegen
+* Erste Git-Kommandos (init, status, add, commit, log, show, diff, blame)
+
+## Remote-Repository
+
+* Advanced Git-Kommandos (clone, push, pull,...)
+---
+
+# Bevor es jetzt wirklich losgeht
+
+* Git ist (eigentlich¹) *kein* Backup-Ersatz!
+* Bitte alle wichtigen Daten sichern
+* Wenn du Probleme hast, etwas zu schnell war oder unklar ist: bitte gleich melden! Das soll kein Frontalvortrag werden!
+
+¹ Das wird jetzt zu ausufernd :)
+
+---
+
+# Git Basis-Konfiguration
+
+Benutzername und Mailadresse zentral setzen:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git config --global user.name</span> <span class="hljs-keyword">"Susanne Musterfrau"</span>
+<span class="hljs-string">% git config --global user.email</span> <span class="hljs-keyword">"nospam@tugraz.at"</span>
+</code></pre>
+
+Alternativ nur für das aktuelle Projekt:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git config user.email</span> <span class="hljs-keyword">"myname@company.example.org"</span>
+</code></pre>
+
+Konfiguration anzeigen:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git config --list</span>
+<span class="hljs-string">% git config --list --global</span>
+</code></pre>
+
+Siehe auch `$HOME/.gitconfig` und (in einem Projekt) `.git/config`
+
+---
+
+# Test-Projekt erstellen
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% mkdir my-project</span>
+<span class="hljs-string">% cd my-project</span>
+<span class="hljs-string">% $EDITOR README.md</span>
+</code></pre>
+
+```markdown
+1  My Project
+2  ==========
+3
+4  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+5  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+6  when an unkonwn(sic!) printer took a galley of type and scrambled it to make
+7  a type specimen book.
+```
+
+Quelle: https://lipsum.com/ (plus Typo in Zeile 6 :))
+---
+
+# Lokales Repository anlegen
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git init</span>
+Initialized empty Git repository in /home/synpro/my-project/.git/
+<span class="hljs-string">% git status</span>
+On branch main
+
+Initial commit
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+        README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre>
+
+Anmerkung: https://github.com/github/renaming/
+
+---
+
+# Datei dem Repository hinzufügen 1/3
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git add README.md</span>
+<span class="hljs-string">% git status</span>
+On branch main
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   README.md
+<span class="hljs-string">%</span>
+</code></pre>
+
+---
+
+# Datei dem Repository hinzufügen 2/3
+
+```bash
+% git commit -v
+```
+
+... ein Editor mit folgendem Inhalt (oder ähnlich, je nach git-Version und Spracheinstellung) wird geöffnet:
+
+```bash
+Add initial version of README.md
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Explicit paths specified without -i or -o; assuming --only paths...
+# On branch main
+#
+# Initial commit
+#
+# Changes to be committed:
+#       new file:   README.md
+#
+# ------------------------ >8 ------------------------
+[...]
+```
+
+**Wichtig**: <a href="https://chris.beams.io/posts/git-commit/">Aussagekräftige Commit-Messages</a> verwenden!
+
+---
+
+# Datei dem Repository hinzufügen 3/3
+
+Statt Commit-Message via Editor einzugeben, kann man diese auch direkt über die Kommandozeile mitgeben:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git commit -m "Add initial version of README.me"</span>
+[main (root-commit) 63456c5] Add initial README.md
+ 1 file changed, 7 insertions(+)
+ create mode 100644 README.md
+</code></pre>
+
+Neuer Status:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git status</span>
+On branch main
+nothing to commit, working tree clean
+</code></pre>
+
+*Anmerkung*: erst mit `git commit` ist die Datei dem (lokalen) Repository hinzugefügt!
+---
+
+# Historie - was wurde bisher gemacht?
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git log</span>
+commit 2cd795a5a670017ed75f53af086f2f8387625477
+Author: Michael Prokop &amp;lt;michael.prokop@synpro.solutions&amp;gt;
+Date:   Wed Jan 17 19:07:01 2021 +0100
+
+    Add initial README.md
+</code></pre>
+
+*Tipp*: Ausgabe-Format lässt sich anpassen, z.B.:
+
+<pre><code class="plain hljs remark-code hljs-string">% git log --oneline
+% git log --stat
+% git log --pretty="format:%h %s (%cr)"
+</code></pre>
+
+---
+
+# Wie schaut der letzte Commit aus?
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git show</span>
+commit 2cd795a5a670017ed75f53af086f2f8387625477
+Author: Michael Prokop &amp;lt;michael.prokop@synpro.solutions&amp;gt;
+Date:   Wed Jan 17 19:07:01 2021 +0100
+
+    Add initial README.md
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..adcfe46
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,7 @@
++My Project
++==========
++
++Lorem Ipsum is simply dummy text of the printing and typesetting industry.
++Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
++when an unkonwn(sic!) printer took a galley of type and scrambled it to make
++a type specimen book.
+</code></pre>
+
+---
+
+# Weiterarbeiten, Typo fixen!
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% $EDITOR README.md</span>
+<span class="hljs-string">% git diff</span>
+<strong>diff --git a/README.md b/README.md
+index adcfe46..45f0920 100644
+--- a/README.md
++++ b/README.md</strong>
+<span style="color:#00e5ee">@@ -3,5 +3,5 @@</span> My Project
+
+ Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+<span style="color:red">-when an unkonwn(sic!) printer took a galley of type and scrambled it to make</span>
+<span style="color:#00AA00">+when an unknown printer took a galley of type and scrambled it to make</span>
+ a type specimen book.
+</code></pre>
+
+*Anmerkung*: vor einem `commit` immer das `diff` anschauen
+
+---
+
+# Besseres diff (manchmal zumindest :))!
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git diff --word-diff</span>
+<strong>diff --git a/README.md b/README.md
+index adcfe46..45f0920 100644
+--- a/README.md
++++ b/README.md</strong>
+<span style="color:#00e5ee">@@ -3,5 +3,5 @@</span> My Project
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+when an <span style="color:red">[-unkonwn(sic!)-]</span><span style="color:#0A0">{+unknown+}</span> printer took a galley of type and scrambled it to make
+a type specimen book.
+</code></pre>
+
+---
+
+# Wer hat wann was gemacht?
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git blame README.md</span>
+^2cd795a (Michael Prokop    2021-01-17 19:07:01 +0100 1) My Project
+^2cd795a (Michael Prokop    2021-01-17 19:07:01 +0100 2) ==========
+^2cd795a (Michael Prokop    2021-01-17 19:07:01 +0100 3)
+^2cd795a (Michael Prokop    2021-01-17 19:07:01 +0100 4) Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+^2cd795a (Michael Prokop    2021-01-17 19:07:01 +0100 5) Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+00000000 (Not Committed Yet 2021-01-17 19:10:42 +0100 6) when an unknown printer took a galley of type and scrambled it to make
+^2cd795a (Michael Prokop    2021-01-17 19:07:01 +0100 7) a type specimen book.
+</code></pre>
+
+---
+# Remote Repository
+
+* Arbeiten an mehreren Standorten
+ * Zuhause
+ * Uni
+ * Firma
+ * …
+* mehrere Leute arbeiten gemeinsam an einem Projekt <br/>
+ * Änderungen für alle sofort einsehbar
+ * kein Hin- und Hermailen von Dateien mehr!
+
+---
+
+<!-- <div style="text-align:center;position:absolute;width:80%;height:100%"> -->
+<div style="text-align:center">
+  <a href="https://geek-and-poke.com/?offset=1352247302000">
+    <img src="includes/geek-and-poke_version-control.png" alt="Geek &amp; Poke Comic: Version control" style="width: 500px" />
+  </a>
+</div>
+
+Quelle: https://geek-and-poke.com/?offset=1352247302000
+
+---
+
+## Remote Git Repositories / Git Hosting 1/2
+
+Hosted Solutions:
+
+* https://github.com/
+* https://gitlab.com/
+* https://bitbucket.org/
+* ...
+
+---
+
+## Remote Git Repositories / Git Hosting 2/2
+
+Selbst hosten:
+
+* https://gitolite.com/
+* https://gitlab.com/
+* https://gogs.io/ bzw. https://gitea.io/
+* https://www.gerritcodereview.com/
+* https://kallithea-scm.org/
+* ...
+
+---
+
+## Alle holen sich jetzt einen Git Hosting Account
+
+* https://github.com/join
+* https://gitlab.com/users/sign_in
+* ...
+
+---
+
+## Praxisübungen
+
+* Repository "forken" bzw. neu anlegen, z.B.:
+  * https://github.com/SynProSolutions/lorem-ipsum
+* `git clone`
+* `git pull`
+* `git push`
+
+---
+
+## Git Remote Workflow
+
+<div style="text-align:center">
+  <a href="https://www.git-tower.com/learn/git/ebook/en/command-line/remote-repositories/introduction/">
+    <img src="includes/basic-remote-workflow.png" alt="git remote workflow" style="width:500px" />
+  </a>
+</div>
+
+<small>Quelle: <a href="https://www.git-tower.com/learn/git/ebook/en/desktop-gui/remote-repositories/introduction/">git-tower.com</a></small>
+
+---
+
+# Arbeiten mit LaTeX
+
+* Datei `.gitignore` um Dateien zu ignorieren
+* Beispielprojekt (siehe auch https://latex.tugraz.at/vorlagen/allgemein):
+  * https://github.com/novoid/LaTeX-KOMA-template
+* Entweder "forken":
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/$DEIN_USERNAME/LaTeX-KOMA-template</span>
+<span class="hljs-string">% cd LaTeX-KOMA-template</span>
+<span class="hljs-string">% make</span>
+</code></pre>
+
+* ... oder nur clonen:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/novoid/LaTeX-KOMA-template</span>
+<span class="hljs-string">% cd LaTeX-KOMA-template</span>
+<span class="hljs-string">% make</span>
+</code></pre>
+
+---
+# Advanced Topics
+
+* `branch`
+* `merge`
+* `tag`
+* ...
+
+---
+
+# Shell-Prompt
+
+Zum Beispiel <a href="https://grml.org/zsh/">grml-zshrc</a>:
+
+.center[![grml-zshrc](includes/grml-zsh-prompt.png)</a>]
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% test -r ~/.zshrc.local || \</span>
+<span class="hljs-string">  curl -L https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc &gt; ~/.zshrc.local</span>
+</code></pre>
+
+oder <a href="https://github.com/powerline/powerline">powerline</a>
+bzw. <a href="https://github.com/bhilburn/powerlevel9k/">powerlevel9k</a>:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% . /usr/share/powerline/bindings/zsh/powerline.zsh</span>
+
+<span class="hljs-string">$ . /usr/share/powerline/bindings/bash/powerline.sh</span>
+</code></pre>
+
+---
+
+# Weiterführende Literatur
+
+## Git
+
+<ul class="nospace-rows">
+<li>"git $cmd --help" bzw. <a href="https://www.kernel.org/pub/software/scm/git/docs/">Manpages</a>
+<li>Freies deutsches (Online-)Buch zu Git: <a href="http://gitbu.ch/">http://gitbu.ch/</a>
+<li>Freies englisches (Online-)Buch zu Git: <a href="https://book.git-scm.com/book/">https://book.git-scm.com/book/</a> (deutsche, aber ältere Version: <a href="https://git-scm.com/book/de/">https://git-scm.com/book/de/</a>)
+<li>Flight rules for Git: <a href="https://github.com/k88hudson/git-flight-rules">https://github.com/k88hudson/git-flight-rules</a>
+<li>Github Git Cheat Sheet: <a href="https://education.github.com/git-cheat-sheet-education.pdf">git-cheat-sheet-education.pdf</a>
+<li>Git Cheat Sheets: <a href="https://training.github.com/">training.github.com</a>
+<li>Dokumentation von Archlinux: <a href="https://wiki.archlinux.org/index.php/Git">https://wiki.archlinux.org/index.php/Git</a>
+<li>gittutorial man page: <a href="https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html</a>
+</ul>
+
+## Git-Workflow
+
+<ul class="nospace-rows">
+<li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows">https://www.atlassian.com/git/tutorials/comparing-workflows</a>
+<li><a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows">https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows</a>
+</ul>
+
+---
+
+# Danke für die Aufmerksamkeit
+
+Und wo gibt's diese Folien? Natürlich via Git:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-wie-2021.git</span>
+</code></pre>
+
+<br>
+<br>
+
+.center[<a href="https://synpro.solutions/?git-workshop-ieee-wie-2021">![SynPro Solutions](includes/synpro.png)</a>]
+
+<div style="text-align:center">
+  <a href="https://twitter.com/synprosolutions">
+  @SynProSolutions <img src="includes/Twitter_Logo_Blue.png" alt="SynPro Solutions on Twitter" style="width: 75px; vertical-align: -25px;" />
+  </a>
+</div>
+
+<!-- end of slide content -->
+    </textarea>
+    <script src="includes/remark.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+    </script>
+  </body>
+</html>
